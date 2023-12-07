@@ -1,0 +1,17 @@
+D:\Вика\Универ\4\Комп графика\Indiv2_CG\Indiv\bin\Release\net6.0-windows\Indiv.exe
+D:\Вика\Универ\4\Комп графика\Indiv2_CG\Indiv\bin\Release\net6.0-windows\Indiv.deps.json
+D:\Вика\Универ\4\Комп графика\Indiv2_CG\Indiv\bin\Release\net6.0-windows\Indiv.runtimeconfig.json
+D:\Вика\Универ\4\Комп графика\Indiv2_CG\Indiv\bin\Release\net6.0-windows\Indiv.dll
+D:\Вика\Универ\4\Комп графика\Indiv2_CG\Indiv\bin\Release\net6.0-windows\Indiv.pdb
+D:\Вика\Универ\4\Комп графика\Indiv2_CG\Indiv\obj\Release\net6.0-windows\Indiv.csproj.AssemblyReference.cache
+D:\Вика\Универ\4\Комп графика\Indiv2_CG\Indiv\obj\Release\net6.0-windows\Indiv.Form1.resources
+D:\Вика\Универ\4\Комп графика\Indiv2_CG\Indiv\obj\Release\net6.0-windows\Indiv.csproj.GenerateResource.cache
+D:\Вика\Универ\4\Комп графика\Indiv2_CG\Indiv\obj\Release\net6.0-windows\Indiv.GeneratedMSBuildEditorConfig.editorconfig
+D:\Вика\Универ\4\Комп графика\Indiv2_CG\Indiv\obj\Release\net6.0-windows\Indiv.AssemblyInfoInputs.cache
+D:\Вика\Универ\4\Комп графика\Indiv2_CG\Indiv\obj\Release\net6.0-windows\Indiv.AssemblyInfo.cs
+D:\Вика\Универ\4\Комп графика\Indiv2_CG\Indiv\obj\Release\net6.0-windows\Indiv.csproj.CoreCompileInputs.cache
+D:\Вика\Универ\4\Комп графика\Indiv2_CG\Indiv\obj\Release\net6.0-windows\Indiv.dll
+D:\Вика\Универ\4\Комп графика\Indiv2_CG\Indiv\obj\Release\net6.0-windows\refint\Indiv.dll
+D:\Вика\Универ\4\Комп графика\Indiv2_CG\Indiv\obj\Release\net6.0-windows\Indiv.pdb
+D:\Вика\Универ\4\Комп графика\Indiv2_CG\Indiv\obj\Release\net6.0-windows\Indiv.genruntimeconfig.cache
+D:\Вика\Универ\4\Комп графика\Indiv2_CG\Indiv\obj\Release\net6.0-windows\ref\Indiv.dll
