@@ -38,6 +38,7 @@ namespace Indiv
             }
         }
 
+
         void GetRoom()
         {
             Figure room = Figure.get_Cube(10);
@@ -51,11 +52,41 @@ namespace Indiv
             cameraPoint = center + normal * 11;
 
             room.SetColor(Color.White);
-            room.polygons[0].color = Color.White;
-            room.polygons[1].color = Color.White;
-            room.polygons[2].color = Color.Blue;
-            room.polygons[3].color = Color.Red;
-            room.fMaterial = new Material(0f, 0f, 0.1f, 0.8f);
+            Figure wall1 = new Figure(room.polygons[0], room.points);
+            Figure wall2 = new Figure(room.polygons[1], room.points);
+            Figure wall3 = new Figure(room.polygons[2], room.points);
+            Figure wall4 = new Figure(room.polygons[3], room.points);
+            Figure wall5 = new Figure(room.polygons[4], room.points);
+            Figure wall6 = new Figure(room.polygons[5], room.points);
+
+            wall1.polygons[0].color = Color.White;//back
+            wall2.polygons[0].color = Color.White;//face
+            wall3.polygons[0].color = Color.Blue;//right
+            wall4.polygons[0].color = Color.Red;//left
+            wall5.polygons[0].color = Color.Green;//up
+            wall6.polygons[0].color = Color.Pink;//down
+
+            if(BackWall.Checked)
+                wall1.fMaterial = new Material(1, 0f, 0.1f, 0.5f, 1.05f);
+            else wall1.fMaterial = new Material(0f, 0f, 0.1f, 0.8f);
+            if(FaceWall.Checked)
+                wall2.fMaterial = new Material(1, 0f, 0.1f, 0.5f, 1.05f);
+            else wall2.fMaterial = new Material(0f, 0f, 0.1f, 0.8f);
+            if (RightWall.Checked)
+                wall3.fMaterial = new Material(1, 0f, 0.1f, 0.5f, 1.05f);
+            else wall3.fMaterial = new Material(0f, 0f, 0.1f, 0.8f);
+            if (LeftWall.Checked)
+                wall4.fMaterial = new Material(1, 0f, 0.1f, 0.5f, 1.05f);
+            else wall4.fMaterial = new Material(0f, 0f, 0.1f, 0.8f);
+            if (UpWall.Checked)
+                wall5.fMaterial = new Material(1, 0f, 0.1f, 0.5f, 1.05f);
+            else wall5.fMaterial = new Material(0f, 0f, 0.1f, 0.8f);
+            if (DownWall.Checked)
+                wall6.fMaterial = new Material(1, 0f, 0.1f, 0.5f, 1.05f);
+            else wall6.fMaterial = new Material(0f, 0f, 0.1f, 0.8f);
+
+
+
 
             Figure c1 = Figure.get_Cube(3f);
             c1.Apply(Transform.Translate(-2, 0, -4));
@@ -95,7 +126,13 @@ namespace Indiv
             lights.Add(l1);
             // lights.Add(l2);
 
-            scene.Add(room);
+            //scene.Add(room);
+            scene.Add(wall1);
+            scene.Add(wall2);
+            scene.Add(wall3);
+            scene.Add(wall4);
+            scene.Add(wall5);
+            scene.Add(wall6);
             scene.Add(c1);
             scene.Add(c2);
             scene.Add(c3);

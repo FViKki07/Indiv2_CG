@@ -13,11 +13,13 @@ namespace Indiv
         public Figure host = null;
         public List<int> points = new List<int>();
         public Color color = Color.Black;
+        //public Material material;
         public PointZ normal;
 
         public Polygon(Figure h = null)
         {
             host = h;
+            
         }
 
         public Polygon(Polygon s)

@@ -8,23 +8,23 @@
     "net6.0-windows7.0": []
   },
   "packageFolders": {
-    "C:\\Users\\Виктория\\.nuget\\packages\\": {},
+    "C:\\Users\\Viktoria\\.nuget\\packages\\": {},
     "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\Вика\\Универ\\4\\Комп графика\\Indiv2_CG\\Indiv\\Indiv.csproj",
+      "projectUniqueName": "D:\\Вика\\4course\\Indiv2_CG\\Indiv\\Indiv.csproj",
       "projectName": "Indiv",
-      "projectPath": "D:\\Вика\\Универ\\4\\Комп графика\\Indiv2_CG\\Indiv\\Indiv.csproj",
-      "packagesPath": "C:\\Users\\Виктория\\.nuget\\packages\\",
-      "outputPath": "D:\\Вика\\Универ\\4\\Комп графика\\Indiv2_CG\\Indiv\\obj\\",
+      "projectPath": "D:\\Вика\\4course\\Indiv2_CG\\Indiv\\Indiv.csproj",
+      "packagesPath": "C:\\Users\\Viktoria\\.nuget\\packages\\",
+      "outputPath": "D:\\Вика\\4course\\Indiv2_CG\\Indiv\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
       ],
       "configFilePaths": [
-        "C:\\Users\\Виктория\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\Viktoria\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
@@ -69,7 +69,7 @@
             "privateAssets": "none"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.201\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.401\\RuntimeIdentifierGraph.json"
       }
     }
   }

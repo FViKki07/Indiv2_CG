@@ -28,6 +28,12 @@ namespace Indiv
             }
         }
 
+        public Figure(Polygon pol, List<PointZ> ps)
+        {
+            foreach (var i in pol.points)
+                points.Add(ps.ElementAt(i));
+            polygons.Add(pol);
+        }
         static public Figure get_Cube(float sz)
         {
             Figure res = new Figure();
@@ -159,16 +165,6 @@ namespace Indiv
             Polygon polygon = null;
             foreach (Polygon p in polygons)
             {
-                /*if (p.points.Count == 3)
-                {
-                    if (IntersectsTriangle(r, p.getPoint(0), p.getPoint(1), p.getPoint(2), out double t) && (intersect == 0 || t < intersect))
-                    {
-                        intersect = t;
-                        polygon = p;
-                    }
-                }
-                else */if (p.points.Count == 4)
-                {
                     //TODO
                     if (IntersectsTriangle(r, p.getPoint(0), p.getPoint(1), p.getPoint(3), out double t) && (intersect == 0 || t < intersect))
                     {
@@ -180,7 +176,7 @@ namespace Indiv
                         intersect = t;
                         polygon = p;
                     }
-                }
+ 
             }
             if (intersect != 0)
             {
