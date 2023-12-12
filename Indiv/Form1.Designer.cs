@@ -42,7 +42,13 @@
             label1 = new Label();
             BackWall = new CheckBox();
             FaceWall = new CheckBox();
+            numericUpDown1 = new NumericUpDown();
+            numericUpDown2 = new NumericUpDown();
+            numericUpDown3 = new NumericUpDown();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)numericUpDown1).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)numericUpDown2).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)numericUpDown3).BeginInit();
             SuspendLayout();
             // 
             // pictureBox1
@@ -104,14 +110,14 @@
             Light_add.Location = new Point(14, 195);
             Light_add.Margin = new Padding(3, 4, 3, 4);
             Light_add.Name = "Light_add";
-            Light_add.Size = new Size(188, 24);
+            Light_add.Size = new Size(186, 24);
             Light_add.TabIndex = 9;
-            Light_add.Text = "Дополнительный цвет";
+            Light_add.Text = "Дополнительный свет";
             Light_add.UseVisualStyleBackColor = true;
             // 
             // button1
             // 
-            button1.Location = new Point(50, 441);
+            button1.Location = new Point(54, 485);
             button1.Margin = new Padding(3, 4, 3, 4);
             button1.Name = "button1";
             button1.Size = new Size(112, 31);
@@ -123,7 +129,7 @@
             // DownWall
             // 
             DownWall.AutoSize = true;
-            DownWall.Location = new Point(24, 322);
+            DownWall.Location = new Point(28, 366);
             DownWall.Margin = new Padding(3, 4, 3, 4);
             DownWall.Name = "DownWall";
             DownWall.Size = new Size(59, 24);
@@ -134,7 +140,7 @@
             // LeftWall
             // 
             LeftWall.AutoSize = true;
-            LeftWall.Location = new Point(24, 299);
+            LeftWall.Location = new Point(28, 343);
             LeftWall.Margin = new Padding(3, 4, 3, 4);
             LeftWall.Name = "LeftWall";
             LeftWall.Size = new Size(73, 24);
@@ -145,7 +151,7 @@
             // UpWall
             // 
             UpWall.AutoSize = true;
-            UpWall.Location = new Point(24, 343);
+            UpWall.Location = new Point(28, 387);
             UpWall.Margin = new Padding(3, 4, 3, 4);
             UpWall.Name = "UpWall";
             UpWall.Size = new Size(90, 24);
@@ -156,7 +162,7 @@
             // RightWall
             // 
             RightWall.AutoSize = true;
-            RightWall.Location = new Point(24, 276);
+            RightWall.Location = new Point(28, 320);
             RightWall.Margin = new Padding(3, 4, 3, 4);
             RightWall.Name = "RightWall";
             RightWall.Size = new Size(83, 24);
@@ -167,7 +173,7 @@
             // label1
             // 
             label1.AutoSize = true;
-            label1.Location = new Point(12, 252);
+            label1.Location = new Point(16, 296);
             label1.Name = "label1";
             label1.Size = new Size(138, 20);
             label1.TabIndex = 16;
@@ -176,7 +182,7 @@
             // BackWall
             // 
             BackWall.AutoSize = true;
-            BackWall.Location = new Point(24, 388);
+            BackWall.Location = new Point(28, 432);
             BackWall.Margin = new Padding(3, 4, 3, 4);
             BackWall.Name = "BackWall";
             BackWall.Size = new Size(80, 24);
@@ -187,7 +193,7 @@
             // FaceWall
             // 
             FaceWall.AutoSize = true;
-            FaceWall.Location = new Point(24, 366);
+            FaceWall.Location = new Point(28, 410);
             FaceWall.Margin = new Padding(3, 4, 3, 4);
             FaceWall.Name = "FaceWall";
             FaceWall.Size = new Size(100, 24);
@@ -195,11 +201,48 @@
             FaceWall.Text = "Передняя";
             FaceWall.UseVisualStyleBackColor = true;
             // 
+            // numericUpDown1
+            // 
+            numericUpDown1.DecimalPlaces = 1;
+            numericUpDown1.Increment = new decimal(new int[] { 5, 0, 0, 65536 });
+            numericUpDown1.Location = new Point(17, 232);
+            numericUpDown1.Maximum = new decimal(new int[] { 49, 0, 0, 65536 });
+            numericUpDown1.Minimum = new decimal(new int[] { 49, 0, 0, -2147418112 });
+            numericUpDown1.Name = "numericUpDown1";
+            numericUpDown1.Size = new Size(51, 27);
+            numericUpDown1.TabIndex = 19;
+            numericUpDown1.Value = new decimal(new int[] { 49, 0, 0, -2147418112 });
+            // 
+            // numericUpDown2
+            // 
+            numericUpDown2.DecimalPlaces = 1;
+            numericUpDown2.Increment = new decimal(new int[] { 5, 0, 0, 65536 });
+            numericUpDown2.Location = new Point(135, 232);
+            numericUpDown2.Maximum = new decimal(new int[] { 49, 0, 0, 65536 });
+            numericUpDown2.Minimum = new decimal(new int[] { 49, 0, 0, -2147418112 });
+            numericUpDown2.Name = "numericUpDown2";
+            numericUpDown2.Size = new Size(51, 27);
+            numericUpDown2.TabIndex = 20;
+            // 
+            // numericUpDown3
+            // 
+            numericUpDown3.DecimalPlaces = 1;
+            numericUpDown3.Increment = new decimal(new int[] { 5, 0, 0, 65536 });
+            numericUpDown3.Location = new Point(77, 232);
+            numericUpDown3.Maximum = new decimal(new int[] { 49, 0, 0, 65536 });
+            numericUpDown3.Minimum = new decimal(new int[] { 49, 0, 0, -2147418112 });
+            numericUpDown3.Name = "numericUpDown3";
+            numericUpDown3.Size = new Size(51, 27);
+            numericUpDown3.TabIndex = 21;
+            // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(914, 663);
+            Controls.Add(numericUpDown3);
+            Controls.Add(numericUpDown2);
+            Controls.Add(numericUpDown1);
             Controls.Add(FaceWall);
             Controls.Add(BackWall);
             Controls.Add(label1);
@@ -218,6 +261,9 @@
             Name = "Form1";
             Text = "Form1";
             ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
+            ((System.ComponentModel.ISupportInitialize)numericUpDown1).EndInit();
+            ((System.ComponentModel.ISupportInitialize)numericUpDown2).EndInit();
+            ((System.ComponentModel.ISupportInitialize)numericUpDown3).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -238,5 +284,8 @@
         private Label label1;
         private CheckBox BackWall;
         private CheckBox FaceWall;
+        private NumericUpDown numericUpDown1;
+        private NumericUpDown numericUpDown2;
+        private NumericUpDown numericUpDown3;
     }
 }

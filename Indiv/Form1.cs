@@ -66,10 +66,10 @@ namespace Indiv
             wall5.polygons[0].color = Color.Green;//up
             wall6.polygons[0].color = Color.Pink;//down
 
-            if(BackWall.Checked)
+            if (BackWall.Checked)
                 wall1.fMaterial = new Material(1, 0f, 0.1f, 0.5f, 1.05f);
             else wall1.fMaterial = new Material(0f, 0f, 0.1f, 0.8f);
-            if(FaceWall.Checked)
+            if (FaceWall.Checked)
                 wall2.fMaterial = new Material(1, 0f, 0.1f, 0.5f, 1.05f);
             else wall2.fMaterial = new Material(0f, 0f, 0.1f, 0.8f);
             if (RightWall.Checked)
@@ -86,11 +86,10 @@ namespace Indiv
             else wall6.fMaterial = new Material(0f, 0f, 0.1f, 0.8f);
 
 
-
-
             Figure c1 = Figure.get_Cube(3f);
             c1.Apply(Transform.Translate(-2, 0, -4));
             c1.Apply(Transform.RotateZ(60));
+
             c1.SetColor(Color.Yellow);
             if (cube_mirror.Checked)
                 c1.fMaterial = new Material(1, 0f, 0.1f, 0.5f, 1.05f);
@@ -122,11 +121,18 @@ namespace Indiv
             c3.fMaterial = new Material(0, 0f, 0.1f, 1f, 1f);
 
             Light l1 = new Light(new PointZ(0, 2, 4.9), new PointZ(1, 1, 1));
-            //Light l2 = new Light(new PointZ(-4.9f, -4.9f, 4.9f), new PointZ(1f, 1f, 1f));
             lights.Add(l1);
-            // lights.Add(l2);
+            if (Light_add.Checked)
+            {
+                float x = (float)numericUpDown1.Value;
+                float y = (float)numericUpDown3.Value;
+                float z = (float)numericUpDown2.Value;
 
-            //scene.Add(room);
+                Light l2 = new Light(new PointZ(x, y, z), new PointZ(1f, 1f, 1f));
+                lights.Add(l2);
+            }
+
+
             scene.Add(wall1);
             scene.Add(wall2);
             scene.Add(wall3);
