@@ -69,6 +69,11 @@ namespace Indiv
             return result;
         }
 
+        public static PointZ Product(PointZ u, PointZ v)
+        {
+            return new PointZ(u.X * v.X, u.Y * v.Y, u.Z * v.Z);
+        }
+
         /* // Векторное произведение векторов
          public static PointZ CrossProduct(PointZ u, PointZ v)
          {

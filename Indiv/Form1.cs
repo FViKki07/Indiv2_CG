@@ -148,23 +148,6 @@ namespace Indiv
 
         void BackwardRayTracing()
         {
-            pixel_map();
-            for (int i = 0; i < width; ++i)
-            {
-                for (int j = 0; j < height; ++j)
-                {
-                    Ray r = new Ray(cameraPoint, pixels[i, j]);
-                    r.start = new PointZ(pixels[i, j]);
-                    PointZ color = RayTrace(r, 5, 1);
-                    if (color.X > 1.0f || color.Y > 1.0f || color.Z > 1.0f)
-                        color.Normalize();
-                    pixels_color[i, j] = Color.FromArgb((int)(255 * color.X), (int)(255 * color.Y), (int)(255 * color.Z));
-                }
-            }
-        }
-
-        public void pixel_map()
-        {
             pixels = new PointZ[width, height];
             pixels_color = new Color[width, height];
             PointZ step_up = (up_right - up_left) / (width - 1);
@@ -182,6 +165,19 @@ namespace Indiv
                 }
                 up += step_up;
                 down += step_down;
+            }
+
+            for (int i = 0; i < width; ++i)
+            {
+                for (int j = 0; j < height; ++j)
+                {
+                    Ray r = new Ray(cameraPoint, pixels[i, j]);
+                    r.start = new PointZ(pixels[i, j]);
+                    PointZ color = RayTrace(r, 5, 1);
+                    if (color.X > 1.0f || color.Y > 1.0f || color.Z > 1.0f)
+                        color.Normalize();
+                    pixels_color[i, j] = Color.FromArgb((int)(255 * color.X), (int)(255 * color.Y), (int)(255 * color.Z));
+                }
             }
         }
 
@@ -232,13 +228,10 @@ namespace Indiv
             foreach (Light light in lights)
             {
                 PointZ ambient_coef = light.color * material.ambient;
-                //модул€ци€ цвета 
-                ambient_coef.X = (ambient_coef.X * material.color.X);
-                ambient_coef.Y = (ambient_coef.Y * material.color.Y);
-                ambient_coef.Z = (ambient_coef.Z * material.color.Z);
+                ambient_coef = PointZ.Product(ambient_coef, material.color);
                 res_color += ambient_coef;
                 if (!IsVisible(light.position, hit_point))
-                    res_color += light.Shade(hit_point, normal, material.color, material.diffuse);
+                    res_color += light.ShadeByLambert(hit_point, normal, material.color, material.diffuse);
             }
 
             if (material.reflection > 0)//отраженный 

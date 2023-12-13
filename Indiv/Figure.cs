@@ -24,7 +24,7 @@ namespace Indiv
             foreach (Polygon s in f.polygons)
             {
                 polygons.Add(new Polygon(s));
-                polygons.Last().host = this;
+                polygons.Last().figure = this;
             }
         }
 

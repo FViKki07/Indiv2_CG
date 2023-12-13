@@ -1,8 +1,10 @@
-﻿using System;
+﻿using Microsoft.VisualBasic;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace Indiv
 {
@@ -18,26 +20,32 @@ namespace Indiv
             radius = r;
         }
 
-        public static bool SphereIntersection(Ray r, PointZ sphere_pos, float sphere_rad, out double t)
+        public static bool SphereIntersection(Ray r, PointZ centre, float radius, out double intersection)
         {
-            PointZ k = r.start - sphere_pos;
-            double b = PointZ.DotProduct(k, r.direction);
-            double c = PointZ.DotProduct(k, k) - sphere_rad * sphere_rad;
-            double d = b * b - c;
-            t = 0;
-            if (d >= 0)
+            
+            PointZ oc = r.start - centre;
+
+            double a = PointZ.DotProduct(r.direction, r.direction);
+            double b = 2 * PointZ.DotProduct(oc, r.direction);
+            double c = PointZ.DotProduct(oc,oc) - radius * radius;
+
+            double discriminant = b * b - 4 * a * c;
+            intersection = 0;
+            if (discriminant < 0)
             {
-                double sqrtd = Math.Sqrt(d);
-                double t1 = -b + sqrtd;
-                double t2 = -b - sqrtd;
-
-                double min_t = Math.Min(t1, t2);
-                double max_t = Math.Max(t1, t2);
-
-                t = (min_t > eps) ? min_t : max_t;
-                return t > eps;
+                return false; 
             }
-            return false;
+
+            double sqrtd = Math.Sqrt(discriminant);
+            double t1 = (-b + sqrtd)/(2 * a);
+            double t2 = (-b - sqrtd )/ (2 * a);
+
+            double min_t = Math.Min(t1, t2);
+            double max_t = Math.Max(t1, t2);
+
+            intersection = (min_t > eps) ? min_t : max_t;
+            return intersection > eps;
+
         }
 
         public override void SetColor(Color dw)
@@ -45,13 +53,13 @@ namespace Indiv
             color = dw;
         }
 
-        public override bool Intersection(Ray r, out double t, out PointZ normal)
+        public override bool Intersection(Ray r, out double intersection, out PointZ normal)
         {
-            t = 0;
+            intersection = 0;
             normal = null;
-            if (SphereIntersection(r, points[0], radius, out t) && (t > eps))
+            if (SphereIntersection(r, points[0], radius, out intersection))
             {
-                normal = (r.start + r.direction * t) - points[0];
+                normal = (r.start + r.direction * intersection) - points[0];
                 normal.Normalize();
                 fMaterial.color = new PointZ(color.R / 255f, color.G / 255f, color.B / 255f);
                 return true;

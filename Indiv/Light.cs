@@ -18,7 +18,7 @@ namespace Indiv
         }
 
         //TODO
-        public PointZ Shade(PointZ hit_point, PointZ normal, PointZ material_color, float diffuse_coef)
+        public PointZ ShadeByLambert(PointZ hit_point, PointZ normal, PointZ material_color, float diffuse_coef)
         {
             PointZ dir = position - hit_point;
             dir.Normalize();

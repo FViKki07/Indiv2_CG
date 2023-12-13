@@ -10,22 +10,21 @@ namespace Indiv
 {
     public class Polygon
     {
-        public Figure host = null;
+        public Figure figure = null;
         public List<int> points = new List<int>();
         public Color color = Color.Black;
-        //public Material material;
         public PointZ normal;
 
-        public Polygon(Figure h = null)
+        public Polygon(Figure f = null)
         {
-            host = h;
+            figure = f;
             
         }
 
         public Polygon(Polygon s)
         {
             points = new List<int>(s.points);
-            host = s.host;
+            figure = s.figure;
             //drawing_pen = s.drawing_pen.Clone() as Pen;
             color = s.color;
             normal = new PointZ(s.normal);
@@ -34,8 +33,8 @@ namespace Indiv
 
         public PointZ getPoint(int index)
         {
-            if (host != null)
-                return host.points[points[index]];
+            if (figure != null)
+                return figure.points[points[index]];
             return null;
         }
 
