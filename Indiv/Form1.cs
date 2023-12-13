@@ -155,7 +155,7 @@ namespace Indiv
                 {
                     Ray r = new Ray(cameraPoint, pixels[i, j]);
                     r.start = new PointZ(pixels[i, j]);
-                    PointZ color = RayTrace(r, 10, 1);
+                    PointZ color = RayTrace(r, 5, 1);
                     if (color.X > 1.0f || color.Y > 1.0f || color.Z > 1.0f)
                         color.Normalize();
                     pixels_color[i, j] = Color.FromArgb((int)(255 * color.X), (int)(255 * color.Y), (int)(255 * color.Z));
@@ -192,8 +192,8 @@ namespace Indiv
             foreach (Figure fig in scene)
                 if (fig.Intersection(r, out double t, out PointZ n))
                     if (t < max_t && t > Figure.eps)
-                        return false;
-            return true;
+                        return true;
+            return false;
         }
 
 
@@ -207,7 +207,7 @@ namespace Indiv
             PointZ res_color = new PointZ(0, 0, 0);
             bool refract_out_of_figure = false;
 
-            foreach (Figure fig in scene)
+            foreach (Figure fig in scene)//ближайша€ фигура, которую пересекает луч
             {
                 if (fig.Intersection(r, out double intersect, out PointZ norm))
                     if (intersect < rey_fig_intersect || rey_fig_intersect == 0)
@@ -232,21 +232,22 @@ namespace Indiv
             foreach (Light light in lights)
             {
                 PointZ ambient_coef = light.color * material.ambient;
+                //модул€ци€ цвета 
                 ambient_coef.X = (ambient_coef.X * material.color.X);
                 ambient_coef.Y = (ambient_coef.Y * material.color.Y);
                 ambient_coef.Z = (ambient_coef.Z * material.color.Z);
                 res_color += ambient_coef;
-                if (IsVisible(light.position, hit_point))
+                if (!IsVisible(light.position, hit_point))
                     res_color += light.Shade(hit_point, normal, material.color, material.diffuse);
             }
 
-            if (material.reflection > 0)
+            if (material.reflection > 0)//отраженный 
             {
                 Ray reflected_ray = r.Reflect(hit_point, normal);
                 res_color += material.reflection * RayTrace(reflected_ray, iter - 1, env);
             }
 
-            if (material.refraction > 0)
+            if (material.refraction > 0)//преломленный
             {
                 float refract_coef;
                 if (refract_out_of_figure)

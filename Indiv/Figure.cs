@@ -126,8 +126,9 @@ namespace Indiv
             PointZ edge2 = p2 - p0;
             PointZ h = r.direction * edge2;
             double a = PointZ.DotProduct(edge1, h);
-            if (a > -eps && a < eps)
+            if (a > -eps && a < eps)//параллельность луча и полигона
                 return false;
+
             double f = 1.0f / a;
             PointZ s = r.start - p0;
             double u = f * PointZ.DotProduct(s, h);
@@ -165,13 +166,12 @@ namespace Indiv
             Polygon polygon = null;
             foreach (Polygon p in polygons)
             {
-                    //TODO
-                    if (IntersectsTriangle(r, p.getPoint(0), p.getPoint(1), p.getPoint(3), out double t) && (intersect == 0 || t < intersect))
+                    if (IntersectsTriangle(r, p.getPoint(0), p.getPoint(1), p.getPoint(2), out double t) && (intersect == 0 || t < intersect))
                     {
                         intersect = t;
                         polygon = p;
                     }
-                    else if (IntersectsTriangle(r, p.getPoint(1), p.getPoint(2), p.getPoint(3), out t) && (intersect == 0 || t < intersect))
+                    else if (IntersectsTriangle(r, p.getPoint(0), p.getPoint(2), p.getPoint(3), out t) && (intersect == 0 || t < intersect))
                     {
                         intersect = t;
                         polygon = p;

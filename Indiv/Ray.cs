@@ -25,26 +25,15 @@ namespace Indiv
             direction = r.direction;
         }
 
-        /// <summary>
-        /// Создает отраженный луч относительно заданной точки пересечения hit_point и нормали normal
-        /// </summary>
-        /// <param name="hit_point"></param>
-        /// <param name="normal"></param>
-        /// <returns></returns>
+
+        // Создает отраженный луч относительно заданной точки пересечения hit_point и нормали normal
         public Ray Reflect(PointZ hit_point, PointZ normal)
         {
             PointZ reflect_dir = direction - 2 * normal * PointZ.DotProduct(direction, normal);
             return new Ray(hit_point, hit_point + reflect_dir);
         }
 
-        /// <summary>
-        /// Создает отраженный луч относительно заданной точки пересечения hit_point и нормали normal
-        /// </summary>
-        /// <param name="hit_point"></param>
-        /// <param name="normal"></param>
-        /// <param name="refraction"></param>
-        /// <param name="refract_coef"></param>
-        /// <returns></returns>
+        //Создает отраженный луч относительно заданной точки пересечения hit_point и нормали normal
         public Ray Refract(PointZ hit_point, PointZ normal,float refraction ,float refract_coef)
         {
             Ray res_ray = new Ray();
