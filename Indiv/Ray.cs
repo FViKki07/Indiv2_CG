@@ -33,7 +33,7 @@ namespace Indiv
             return new Ray(hit_point, hit_point + reflect_dir);
         }
 
-        //Создает отраженный луч 
+        //Создает преломленный луч 
         public Ray Refract(PointZ hit_point, PointZ normal,float refraction ,float refract_coef)
         {
             Ray res_ray = new Ray();

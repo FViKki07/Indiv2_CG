@@ -18,7 +18,6 @@ namespace Indiv
             InitializeComponent();
             height = pictureBox1.Height;
             width = pictureBox1.Width;
-            //bmp = new Bitmap(width, height);
             cameraPoint = new PointZ();
             up_left = new PointZ();
             up_right = new PointZ();
@@ -26,16 +25,6 @@ namespace Indiv
             down_right = new PointZ();
             pictureBox1.Image = new Bitmap(width, height);
             GetRoom();
-            BackwardRayTracing();
-            for (int i = 0; i < width; ++i)
-            {
-                for (int j = 0; j < height; ++j)
-                {
-                    (pictureBox1.Image as Bitmap).SetPixel(i, j, pixels_color[i, j]);
-                }
-                //pictureBox1.Image = bmp;
-                pictureBox1.Invalidate();
-            }
         }
 
 
@@ -67,22 +56,40 @@ namespace Indiv
             wall6.polygons[0].color = Color.Pink;//down
 
             if (BackWall.Checked)
+            {
+                wall1.SetColor(Color.Black);
                 wall1.fMaterial = new Material(1, 0f, 0.1f, 0.5f, 1.05f);
+            }
             else wall1.fMaterial = new Material(0f, 0f, 0.1f, 0.8f);
             if (FaceWall.Checked)
+            {
+                wall2.SetColor(Color.Black);
                 wall2.fMaterial = new Material(1, 0f, 0.1f, 0.5f, 1.05f);
+            }
             else wall2.fMaterial = new Material(0f, 0f, 0.1f, 0.8f);
             if (RightWall.Checked)
+            {
+                wall3.SetColor(Color.Black);
                 wall3.fMaterial = new Material(1, 0f, 0.1f, 0.5f, 1.05f);
+            }
             else wall3.fMaterial = new Material(0f, 0f, 0.1f, 0.8f);
             if (LeftWall.Checked)
+            {
+                wall4.SetColor(Color.Black);
                 wall4.fMaterial = new Material(1, 0f, 0.1f, 0.5f, 1.05f);
+            }
             else wall4.fMaterial = new Material(0f, 0f, 0.1f, 0.8f);
             if (UpWall.Checked)
+            {
+                wall5.SetColor(Color.Black);
                 wall5.fMaterial = new Material(1, 0f, 0.1f, 0.5f, 1.05f);
+            }
             else wall5.fMaterial = new Material(0f, 0f, 0.1f, 0.8f);
             if (DownWall.Checked)
+            {
+                wall6.SetColor(Color.Black);
                 wall6.fMaterial = new Material(1, 0f, 0.1f, 0.5f, 1.05f);
+            }
             else wall6.fMaterial = new Material(0f, 0f, 0.1f, 0.8f);
 
 
@@ -144,36 +151,48 @@ namespace Indiv
             scene.Add(c3);
             scene.Add(s1);
             scene.Add(s2);
+
+            BackwardRayTracing();
+            for (int i = 0; i < width; ++i)
+            {
+                for (int j = 0; j < height; ++j)
+                {
+                    (pictureBox1.Image as Bitmap).SetPixel(i, j, pixels_color[i, j]);
+                }
+                pictureBox1.Invalidate();
+            }
         }
+
 
         void BackwardRayTracing()
         {
             pixels = new PointZ[width, height];
+            Init();
+
+            /*
+  PointZ origin = new PointZ(0, 0, 0); 
             pixels_color = new Color[width, height];
-            PointZ step_up = (up_right - up_left) / (width - 1);
-            PointZ step_down = (down_right - down_left) / (width - 1);
-            PointZ up = new PointZ(up_left);
-            PointZ down = new PointZ(down_left);
+            PointZ horizontalStep = new PointZ(1, 0, 0);
+            PointZ verticalStep = new PointZ(0, 1, 0); 
+
+            pixels = new PointZ[width, height];
+
             for (int i = 0; i < width; ++i)
             {
-                PointZ step_y = (up - down) / (height - 1);
-                PointZ d = new PointZ(down);
                 for (int j = 0; j < height; ++j)
                 {
-                    pixels[i, j] = d;
-                    d += step_y;
+                    pixels[i, j] = origin + i * horizontalStep + j * verticalStep;
                 }
-                up += step_up;
-                down += step_down;
-            }
+            }*/
 
+            pixels_color = new Color[width, height];
             for (int i = 0; i < width; ++i)
             {
                 for (int j = 0; j < height; ++j)
                 {
                     Ray r = new Ray(cameraPoint, pixels[i, j]);
                     r.start = new PointZ(pixels[i, j]);
-                    PointZ color = RayTrace(r, 5, 1);
+                    PointZ color = RayTrace(r, 5);
                     if (color.X > 1.0f || color.Y > 1.0f || color.Z > 1.0f)
                         color.Normalize();
                     pixels_color[i, j] = Color.FromArgb((int)(255 * color.X), (int)(255 * color.Y), (int)(255 * color.Z));
@@ -193,16 +212,14 @@ namespace Indiv
         }
 
 
-        public PointZ RayTrace(Ray r, int iter, float env)
+        public PointZ RayTrace(Ray r, int iter)
         {
             if (iter <= 0)
                 return new PointZ(0, 0, 0);
+
             double rey_fig_intersect = 0;
             PointZ normal = null;
             Material material = new Material();
-            PointZ res_color = new PointZ(0, 0, 0);
-            bool refract_out_of_figure = false;
-
             foreach (Figure fig in scene)//ближайшая фигура, которую пересекает луч
             {
                 if (fig.Intersection(r, out double intersect, out PointZ norm))
@@ -217,6 +234,7 @@ namespace Indiv
             if (rey_fig_intersect == 0)
                 return new PointZ(0, 0, 0);
 
+            bool refract_out_of_figure = false;
             if (PointZ.DotProduct(r.direction, normal) > 0)
             {
                 normal *= -1;
@@ -224,6 +242,7 @@ namespace Indiv
             }
 
             PointZ hit_point = r.start + r.direction * rey_fig_intersect;
+            PointZ res_color = new PointZ(0, 0, 0);
 
             foreach (Light light in lights)
             {
@@ -237,7 +256,7 @@ namespace Indiv
             if (material.reflection > 0)//отраженный 
             {
                 Ray reflected_ray = r.Reflect(hit_point, normal);
-                res_color += material.reflection * RayTrace(reflected_ray, iter - 1, env);
+                res_color += material.reflection * RayTrace(reflected_ray, iter - 1);
             }
 
             if (material.refraction > 0)//преломленный
@@ -251,7 +270,7 @@ namespace Indiv
                 Ray refracted_ray = r.Refract(hit_point, normal, material.refraction, refract_coef);
 
                 if (refracted_ray != null)
-                    res_color += material.refraction * RayTrace(refracted_ray, iter - 1, material.environment);
+                    res_color += material.refraction * RayTrace(refracted_ray, iter - 1);
             }
             return res_color;
         }
@@ -274,5 +293,25 @@ namespace Indiv
             }
         }
 
+
+        void Init()
+        {
+            PointZ step_up = (up_right - up_left) / (width - 1);
+            PointZ step_down = (down_right - down_left) / (width - 1);
+            PointZ up = new PointZ(up_left);
+            PointZ down = new PointZ(down_left);
+            for (int i = 0; i < width; ++i)
+            {
+                PointZ step_y = (up - down) / (height - 1);
+                PointZ d = new PointZ(down);
+                for (int j = 0; j < height; ++j)
+                {
+                    pixels[i, j] = d;
+                    d += step_y;
+                }
+                up += step_up;
+                down += step_down;
+            }
+        }
     }
 }

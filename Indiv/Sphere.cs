@@ -20,34 +20,6 @@ namespace Indiv
             radius = r;
         }
 
-        public static bool SphereIntersection(Ray r, PointZ centre, float radius, out double intersection)
-        {
-            
-            PointZ oc = r.start - centre;
-
-            double a = PointZ.DotProduct(r.direction, r.direction);
-            double b = 2 * PointZ.DotProduct(oc, r.direction);
-            double c = PointZ.DotProduct(oc,oc) - radius * radius;
-
-            double discriminant = b * b - 4 * a * c;
-            intersection = 0;
-            if (discriminant < 0)
-            {
-                return false; 
-            }
-
-            double sqrtd = Math.Sqrt(discriminant);
-            double t1 = (-b + sqrtd)/(2 * a);
-            double t2 = (-b - sqrtd )/ (2 * a);
-
-            double min_t = Math.Min(t1, t2);
-            double max_t = Math.Max(t1, t2);
-
-            intersection = (min_t > eps) ? min_t : max_t;
-            return intersection > eps;
-
-        }
-
         public override void SetColor(Color dw)
         {
             color = dw;
@@ -57,7 +29,29 @@ namespace Indiv
         {
             intersection = 0;
             normal = null;
-            if (SphereIntersection(r, points[0], radius, out intersection))
+            var centre = points[0]; 
+            PointZ oc = r.start - centre;
+
+            double a = PointZ.DotProduct(r.direction, r.direction);
+            double b = 2 * PointZ.DotProduct(oc, r.direction);
+            double c = PointZ.DotProduct(oc, oc) - radius * radius;
+
+            double discriminant = b * b - 4 * a * c;
+            intersection = 0;
+            if (discriminant < 0)
+            {
+                return false;
+            }
+
+            double sqrtd = Math.Sqrt(discriminant);
+            double t1 = (-b + sqrtd) / (2 * a);
+            double t2 = (-b - sqrtd) / (2 * a);
+
+            double min_t = Math.Min(t1, t2);
+            double max_t = Math.Max(t1, t2);
+
+            intersection = (min_t > eps) ? min_t : max_t;
+            if(intersection > eps)
             {
                 normal = (r.start + r.direction * intersection) - points[0];
                 normal.Normalize();
